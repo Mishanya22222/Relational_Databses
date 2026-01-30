@@ -1,7 +1,7 @@
 import sqlite3
 import pandas as pd
 
-conn = sqlite3.connect("baseball.db")
+conn = sqlite3.connect("../baseball.db") # ../ back up to look in main directory
 cursor = conn.cursor()
 
 query = """ 

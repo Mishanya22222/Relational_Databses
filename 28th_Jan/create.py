@@ -5,7 +5,7 @@ import sqlite3
 import pandas as pd
 
 # Create a new SQLite database (or connect to an existing one)
-conn = sqlite3.connect('baseball.db')
+conn = sqlite3.connect('../baseball.db')
 cursor = conn.cursor()
 
 # Read data from a CSV file and store it in the df variable
