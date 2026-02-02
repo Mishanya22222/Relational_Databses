@@ -41,8 +41,12 @@ def f(player):
     conn.close()
     return records[0][0]
 
-print(f("schmimi01"))  # Example usage to test the function
-# iface = gr.Interface(fn=f, inputs = gr.Dropdown(choices = fetch_phillies()), outputs = "number") # choices is a list of options for the dropdown 
-# iface.launch()
 
+with gr.Blocks() as iface:
+    player_id = gr.Dropdown(choices = fetch_phillies(), label="Select a Phillies Player from 1976", interactive=True)
+    home_runs = gr.Number() # output box for home runs
+    player_id.change(fn = f, inputs = [player_id], outputs = [home_runs]) # use the change to display when something is selected
 
+iface.launch()
+
+# group by and the aggregate function to get total home runs by all players with PHI in 1976
