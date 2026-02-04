@@ -49,4 +49,4 @@ with gr.Blocks() as iface:
 
 iface.launch()
 
-# group by and the aggregate function to get total home runs by all players with PHI in 1976
+
