@@ -5,19 +5,22 @@ conn = sqlite3.connect("../baseball.db")
 cursor = conn.cursor()
 
 # HAVING is used when we need to filter groups after aggregation you made
+# if both columns in the both tables are present, you need to specify which one you want to use by using the table name before the column name, like this: table_name.column_name
+# the order of the JOIN matters for the selected columns
 query = '''
-    SELECT teamID, SUM(HR) AS seasonHR
+    SELECT batting.playerID, batting.yearID, teams.name, SUM(batting.HR) AS seasonHR
     FROM batting
-    WHERE yearID = 2025
-    GROUP BY teamID HAVING seasonHR > 200
-    ORDER BY seasonHR DESC;
+    INNER JOIN teams
+    ON batting.teamID = teams.teamID AND batting.yearID = teams.yearID
+    WHERE batting.playerID = "ruthba01"
+    GROUP BY batting.yearID;
 '''
 
 cursor.execute(query)
 records = cursor.fetchall()
 conn.close()
 
-df = pd.DataFrame(records, columns = ['teamID', 'seasonHR'])
+df = pd.DataFrame(records)
 print(df)
 
 
